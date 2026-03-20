@@ -165,6 +165,7 @@ export default function App() {
       const reader = resp.body.getReader()
       const decoder = new TextDecoder()
       let fullContent = ''
+      let thinkContent = ''
 
       while (true) {
         const { done, value } = await reader.read()
@@ -186,7 +187,7 @@ export default function App() {
       }
 
       // Save assistant message
-      const assistantMsg = { role: 'assistant', content: fullContent, id: genId() }
+      const assistantMsg = { role: 'assistant', content: fullContent, thinking: thinkContent || undefined, id: genId() }
       setConversations(prev => prev.map(c => {
         if (c.id !== convId) return c
         return { ...c, messages: [...c.messages, assistantMsg] }
