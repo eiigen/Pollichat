@@ -5,8 +5,7 @@ A minimal interface for [Pollinations.ai](https://pollinations.ai).
 Get a token at [enter.pollinations.ai](https://enter.pollinations.ai)
 
 Try it!
-[PolliChatter]
-(https://pollichatter.netlify.app/)
+[PolliChatter](https://pollichatter.netlify.app/)
 
 
 ## Features
