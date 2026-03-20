@@ -89,7 +89,7 @@ export default function ApiKeyModal({ onSave, existingToken, existingReferrer })
     <div style={STYLES.overlay}>
       <div style={STYLES.modal}>
         <div style={STYLES.logo}>🌸</div>
-        <div style={STYLES.title}>PolliChat</div>
+        <div style={STYLES.title}>PolliChatter</div>
         <div style={STYLES.subtitle}>
           AI terminal powered by Pollinations.ai<br />
           Add your token for higher rate limits, or go anonymous.

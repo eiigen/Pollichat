@@ -282,7 +282,7 @@ export default function App() {
 
           <div style={{ flex: 1, fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.9rem', color: 'var(--text-secondary)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
             {activeConv?.title || (
-              <span style={{ color: 'var(--text-dim)' }}>PolliChat · Powered by Pollinations.ai</span>
+              <span style={{ color: 'var(--text-dim)' }}>PolliChatter · Powered by Pollinations.ai</span>
             )}
           </div>
 
@@ -322,7 +322,7 @@ export default function App() {
               }}>
                 <div style={{ fontSize: '3rem', marginBottom: '16px' }}>🌸</div>
                 <div style={{ fontFamily: 'var(--font-display)', fontSize: '1.4rem', fontWeight: 800, color: 'var(--text-secondary)', marginBottom: '8px' }}>
-                  PolliChat
+                  PolliChatter
                 </div>
                 <div style={{ fontSize: '0.82rem', lineHeight: 1.6, maxWidth: '360px' }}>
                   Start a conversation. Powered by Pollinations.ai — free, open-source generative AI.
