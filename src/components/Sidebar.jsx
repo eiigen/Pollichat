@@ -18,7 +18,7 @@ export { MODELS }
 export default function Sidebar({
   conversations, activeId, onSelect, onNew, onDelete,
   selectedModel, onModelChange, tokenInfo, onEditToken,
-  sidebarOpen, onToggleSidebar,
+  sidebarOpen, onToggleSidebar, models, modelsLoading,
 }) {
   return (
     <>
@@ -79,6 +79,7 @@ export default function Sidebar({
             <select
               value={selectedModel}
               onChange={e => onModelChange(e.target.value)}
+              disabled={modelsLoading}
               style={{
                 width: '100%', background: 'var(--bg-0)', border: '1px solid var(--border)',
                 borderRadius: '6px', color: 'var(--text-primary)', padding: '7px 10px',
@@ -86,10 +87,8 @@ export default function Sidebar({
                 fontFamily: 'var(--font-mono)',
               }}
             >
-              {MODELS.map(m => (
-                <option key={m.id} value={m.id}>
-                  {m.label}{m.tag ? ` · ${m.tag}` : ''}
-                </option>
+              {models.map(m => (
+                <option key={m.id} value={m.id}>{m.label}</option>
               ))}
             </select>
           </div>
@@ -143,6 +142,7 @@ export default function Sidebar({
           }}>
             <button
               onClick={onEditToken}
+              disabled={modelsLoading}
               style={{
                 width: '100%', background: 'var(--bg-0)', border: '1px solid var(--border)',
                 borderRadius: '8px', padding: '9px 12px', display: 'flex', alignItems: 'center',

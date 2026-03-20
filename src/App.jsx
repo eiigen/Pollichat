@@ -1,9 +1,11 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
+
+const MODELS_URL = 'https://gen.pollinations.ai/v1/models'
 import ChatMessage from './components/ChatMessage.jsx'
 import Sidebar from './components/Sidebar.jsx'
 import ApiKeyModal from './components/ApiKeyModal.jsx'
 
-const TEXT_API = 'https://text.pollinations.ai/openai'
+const TEXT_API = 'https://gen.pollinations.ai/v1/chat/completions'
 const DEFAULT_MODEL = 'openai'
 const SYSTEM_PROMPT = `You are a helpful, concise AI assistant. You communicate clearly and use markdown formatting when it helps readability — code blocks for code, tables for comparisons, headers for structure. Be direct and helpful.`
 
@@ -33,11 +35,26 @@ export default function App() {
   const [input, setInput] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [streamingMsg, setStreamingMsg] = useState(null)
+  const [models, setModels] = useState([{ id: DEFAULT_MODEL, label: DEFAULT_MODEL }])
+  const [modelsLoading, setModelsLoading] = useState(true)
   const [sidebarOpen, setSidebarOpen] = useState(true)
   const [error, setError] = useState(null)
   const messagesEndRef = useRef(null)
   const textareaRef = useRef(null)
   const abortRef = useRef(null)
+
+  // Fetch models on mount
+  useEffect(() => {
+    fetch(MODELS_URL)
+      .then(r => r.json())
+      .then(data => {
+        if (data?.data?.length) {
+          setModels(data.data.map(m => ({ id: m.id, label: m.id })))
+        }
+      })
+      .catch(() => {})
+      .finally(() => setModelsLoading(false))
+  }, [])
 
   // On first load: show modal if no token info exists yet
   useEffect(() => {
@@ -235,6 +252,8 @@ export default function App() {
         onModelChange={model => { setSelectedModel(model); if (activeConv) updateConversation(activeId, c => ({ ...c, model })) }}
         tokenInfo={tokenInfo}
         onEditToken={() => setShowModal(true)}
+        models={models}
+        modelsLoading={modelsLoading}
         sidebarOpen={sidebarOpen}
         onToggleSidebar={() => setSidebarOpen(v => !v)}
       />
